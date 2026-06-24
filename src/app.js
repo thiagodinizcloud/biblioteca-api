@@ -4,8 +4,6 @@ import usuarioRoutes from './routes/usuarioRoutes.js';
 import webRoutes from './routes/web.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import { errorHandler } from './middlewares/error.middleware.js';
-import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from './swagger.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -36,11 +34,6 @@ app.get('/hello-pug', (req, res) => {
 app.use('/livros', livroRoutes);
 app.use('/usuarios', usuarioRoutes);
 app.use('/auth', authRoutes);
-
-app.use('/api-docs',
- swaggerUi.serve,
- swaggerUi.setup(swaggerSpec)
-);
 
 app.use('/', webRoutes);
 
