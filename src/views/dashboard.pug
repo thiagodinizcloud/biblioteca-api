@@ -1,0 +1,75 @@
+doctype html
+html
+  head
+    title Biblioteca Online
+    style.
+      body {
+        font-family: Arial;
+        background-color: #f4f6f9;
+        padding: 30px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+      }
+      .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        width: 400px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        background-color: #007bff;
+        color: white;
+      }
+
+  body
+    h1 📚 Biblioteca Online
+
+    .container
+
+      .card
+        h2 Livros
+        if livros.length === 0
+          p Nenhum livro cadastrado.
+        else
+          table
+            thead
+              tr
+                th ID
+                th Título
+            tbody
+              each livro in livros
+                tr
+                  td #{livro.id}
+                  td #{livro.titulo}
+
+      .card
+        h2 Usuários
+        if usuarios.length === 0
+          p Nenhum usuário cadastrado.
+        else
+          table
+            thead
+              tr
+                th ID
+                th Nome
+            tbody
+              each usuario in usuarios
+                tr
+                  td #{usuario.id}
+                  td #{usuario.nome}
