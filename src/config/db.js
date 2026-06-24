@@ -2,7 +2,6 @@ import dns from 'dns';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 
-// FORÇA o Node a usar DNS públicos
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 dotenv.config();
@@ -26,5 +25,3 @@ export async function connectDB() {
 export function getDB() {
   return db;
 }
-
-console.log("URI:", process.env.MONGO_URI);
