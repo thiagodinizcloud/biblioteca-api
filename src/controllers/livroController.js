@@ -1,4 +1,5 @@
 import LivroService from '../services/livroService.js';
+import { validationResult } from 'express-validator';
 
 class LivroController {
 
@@ -23,8 +24,18 @@ class LivroController {
 
  static async criarLivro(req, res, next) {
   try {
+
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+    return res.status(400).json({
+     sucesso: false,
+     mensagens: errors.array().map(e => e.msg)
+    });
+   }
+
    const livro = await LivroService.criar(req.body);
    res.status(201).json(livro);
+
   } catch (error) {
    next(error);
   }
@@ -32,9 +43,19 @@ class LivroController {
 
  static async atualizarLivro(req, res, next) {
   try {
+
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+    return res.status(400).json({
+     sucesso: false,
+     mensagens: errors.array().map(e => e.msg)
+    });
+   }
+
    const { id } = req.params;
    const livro = await LivroService.atualizar(Number(id), req.body);
    res.json(livro);
+
   } catch (error) {
    next(error);
   }
@@ -42,9 +63,19 @@ class LivroController {
 
  static async atualizarParcialLivro(req, res, next) {
   try {
+
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+    return res.status(400).json({
+     sucesso: false,
+     mensagens: errors.array().map(e => e.msg)
+    });
+   }
+
    const { id } = req.params;
    const livro = await LivroService.atualizar(Number(id), req.body);
    res.json(livro);
+
   } catch (error) {
    next(error);
   }

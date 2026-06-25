@@ -1,18 +1,14 @@
 import { validationResult } from 'express-validator';
 
 export const verificarErros = (req, res, next) => {
+ const errors = validationResult(req);
 
- const erros = validationResult(req);
-
- if (!erros.isEmpty()) {
-
+ if (!errors.isEmpty()) {
   return res.status(400).json({
    sucesso: false,
-   mensagens: erros.array().map(erro => erro.msg)
+   mensagens: errors.array().map(e => e.msg)
   });
-
  }
 
  next();
-
 };
