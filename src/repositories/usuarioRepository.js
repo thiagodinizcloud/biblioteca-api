@@ -19,6 +19,7 @@ class UsuarioRepository {
 
  static async create(usuario) {
   const db = getDB();
+  usuario.id = Number(usuario.id);
   await db.collection('usuarios').insertOne(usuario);
   return usuario;
  }
@@ -26,25 +27,39 @@ class UsuarioRepository {
  static async update(id, data) {
   const db = getDB();
 
-  const result = await db.collection('usuarios').findOneAndUpdate(
+  const usuario = await db.collection('usuarios').findOne({
+   id: Number(id)
+  });
+
+  if (!usuario) return null;
+
+  await db.collection('usuarios').updateOne(
    { id: Number(id) },
-   { $set: data },
-   { returnDocument: 'after' }
+   { $set: data }
   );
 
-  return result.value;
+  return await db.collection('usuarios').findOne({
+   id: Number(id)
+  });
  }
 
  static async patch(id, data) {
   const db = getDB();
 
-  const result = await db.collection('usuarios').findOneAndUpdate(
+  const usuario = await db.collection('usuarios').findOne({
+   id: Number(id)
+  });
+
+  if (!usuario) return null;
+
+  await db.collection('usuarios').updateOne(
    { id: Number(id) },
-   { $set: data },
-   { returnDocument: 'after' }
+   { $set: data }
   );
 
-  return result.value;
+  return await db.collection('usuarios').findOne({
+   id: Number(id)
+  });
  }
 
  static async delete(id) {
